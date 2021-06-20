@@ -9,11 +9,19 @@ module.exports = {
 
     try {
       const conn = await connect();
+
+      //Verify if exist account with this email
       const [row] = await conn.query("SELECT * FROM user WHERE email=?", [
         email,
       ]);
-      const user = row[0];
+      if (row.length == 0) {
+        return res.status(400).json({
+          type: "error",
+          msg: "Dados incorretos",
+        });
+      }
 
+      const user = row[0];
       bcrypt.compare(password, user.password, function (err, match) {
         if (match) {
           return res.json({ type: "success", user });

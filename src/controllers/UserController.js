@@ -42,7 +42,7 @@ module.exports = {
     try {
       const conn = await connect();
 
-      //Verify if id is valid
+      //Verify if exist account with this id
       const [row] = await conn.query("SELECT * FROM user WHERE id=?", [id]);
       if (row.length == 0) {
         return res.status(400).json({
@@ -70,7 +70,7 @@ module.exports = {
     try {
       const conn = await connect();
 
-      //Verify if id is valid
+      //Verify if exist account with this id
       const [row] = await conn.query("SELECT * FROM user WHERE id=?", [id]);
       if (row.length == 0) {
         return res.status(400).json({
