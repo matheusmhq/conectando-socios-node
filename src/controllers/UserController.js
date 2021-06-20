@@ -6,11 +6,24 @@ const { connect } = require("../db");
 module.exports = {
   async store(req, res) {
     const { name, email, password } = req.body;
+    var passwordHash = await bcrypt.hash(password, 10);
 
     try {
       const conn = await connect();
+
+      //Verify if email has register
+      const [row] = await conn.query("SELECT * FROM user WHERE email=?", [
+        email,
+      ]);
+      if (row.length > 0) {
+        return res.status(400).json({
+          type: "error",
+          msg: "Esse e-mail já está cadastrado no sistema",
+        });
+      }
+
       const sql = "INSERT INTO user(name,email,password) VALUES (?,?,?)";
-      const values = [name, email, password];
+      const values = [name, email, passwordHash];
       await conn.query(sql, values);
 
       return res.status(200).json({
@@ -28,15 +41,23 @@ module.exports = {
 
     try {
       const conn = await connect();
+
+      //Verify if id is valid
+      const [row] = await conn.query("SELECT * FROM user WHERE id=?", [id]);
+      if (row.length == 0) {
+        return res.status(400).json({
+          type: "error",
+          msg: "Usuário não encontrado",
+        });
+      }
+
       const sql = "UPDATE user SET name=?, email=? WHERE id=?";
       const values = [name, email, id];
       await conn.query(sql, values);
-      //const user = conn.query("SELECT * FROM user WHERE id=?", [id]);
 
       return res.status(200).json({
         type: "success",
         msg: "Usuário atualizado com sucesso",
-        //user,
       });
     } catch (error) {
       return res.status(400).send({ type: "error", msg: error.message });
@@ -45,17 +66,22 @@ module.exports = {
 
   async show(req, res) {
     const { id } = req.params;
-    console.log("ID SHOW " + id);
 
     try {
       const conn = await connect();
-      const user = conn.query("SELECT * FROM user WHERE id=?", [id]);
-      console.log("USER");
-      console.log(user);
+
+      //Verify if id is valid
+      const [row] = await conn.query("SELECT * FROM user WHERE id=?", [id]);
+      if (row.length == 0) {
+        return res.status(400).json({
+          type: "error",
+          msg: "Usuário não encontrado",
+        });
+      }
 
       return res.status(200).json({
         type: "success",
-        user,
+        user: row[0],
       });
     } catch (error) {
       return res.status(400).send({ type: "error", msg: error.message });
