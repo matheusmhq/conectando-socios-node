@@ -28,10 +28,11 @@ module.exports = {
       const conn = await connect();
 
       //Verify if email has register
-      const [row] = await conn.query("SELECT * FROM user WHERE email=?", [
-        email,
-      ]);
-      if (row.length > 0) {
+      const [verifyEmail] = await conn.query(
+        "SELECT * FROM user WHERE email=?",
+        [email]
+      );
+      if (verifyEmail.length > 0) {
         return res.status(400).json({
           type: "error",
           msg: "Esse e-mail já está cadastrado no sistema",
@@ -39,7 +40,7 @@ module.exports = {
       }
 
       const sql =
-        "INSERT INTO user(name,email,password,whatsapp,facebook,linkedin,instagram,twitter,cep,idCity,idState,address,number,district,complement,createdAt, updatedAt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        "INSERT INTO user(name, email, password, whatsapp, facebook, linkedin, instagram, twitter, cep, idCity, idState, address, number, district, complement, createdAt, updatedAt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
       const values = [
         name,
         email,
@@ -72,22 +73,69 @@ module.exports = {
 
   async update(req, res) {
     const { id } = req.params;
-    const { name, email } = req.body;
+    const {
+      name,
+      email,
+      whatsapp,
+      facebook,
+      linkedin,
+      instagram,
+      twitter,
+      cep,
+      idCity,
+      idState,
+      address,
+      number,
+      district,
+      complement,
+    } = req.body;
 
     try {
       const conn = await connect();
 
       //Verify if exist account with this id
-      const [row] = await conn.query("SELECT * FROM user WHERE id=?", [id]);
-      if (row.length == 0) {
+      const [verifyId] = await conn.query("SELECT * FROM user WHERE id=?", [
+        id,
+      ]);
+      if (verifyId.length == 0) {
         return res.status(400).json({
           type: "error",
           msg: "Usuário não encontrado",
         });
       }
 
-      const sql = "UPDATE user SET name=?, email=? WHERE id=?";
-      const values = [name, email, id];
+      //Verify if email has register
+      const [verifyEmail] = await conn.query(
+        "SELECT * FROM user WHERE email=?",
+        [email]
+      );
+      if (verifyEmail.length > 0) {
+        return res.status(400).json({
+          type: "error",
+          msg: "Esse e-mail já está cadastrado no sistema",
+        });
+      }
+
+      const sql =
+        "UPDATE user SET name=?, email=?, whatsapp=?, facebook=?, linkedin=?, instagram=?, twitter=?, cep=?, idCity=?, idState=?, address=?, number=?, district=?, complement=?, updatedAt=? WHERE id=?";
+      const values = [
+        name,
+        email,
+        whatsapp,
+        facebook,
+        linkedin,
+        instagram,
+        twitter,
+        cep,
+        idCity,
+        idState,
+        address,
+        number,
+        district,
+        complement,
+        new Date(),
+        id,
+      ];
       await conn.query(sql, values);
 
       return res.status(200).json({
@@ -106,8 +154,10 @@ module.exports = {
       const conn = await connect();
 
       //Verify if exist account with this id
-      const [row] = await conn.query("SELECT * FROM user WHERE id=?", [id]);
-      if (row.length == 0) {
+      const [verifyId] = await conn.query("SELECT * FROM user WHERE id=?", [
+        id,
+      ]);
+      if (verifyId.length == 0) {
         return res.status(400).json({
           type: "error",
           msg: "Usuário não encontrado",
@@ -116,7 +166,28 @@ module.exports = {
 
       return res.status(200).json({
         type: "success",
-        user: row[0],
+        user: verifyId[0],
+      });
+    } catch (error) {
+      return res.status(400).send({ type: "error", msg: error.message });
+    }
+  },
+
+  async verifyEmail(req, res) {
+    const { email } = req.params;
+
+    try {
+      const conn = await connect();
+
+      //Verify if email has register
+      const [verifyEmail] = await conn.query(
+        "SELECT * FROM user WHERE email=?",
+        [email]
+      );
+
+      return res.status(200).json({
+        type: "success",
+        hasRegister: verifyEmail.length == 0 ? false : true,
       });
     } catch (error) {
       return res.status(400).send({ type: "error", msg: error.message });
