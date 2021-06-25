@@ -5,7 +5,23 @@ const { connect } = require("../db");
 
 module.exports = {
   async store(req, res) {
-    const { name, email, password } = req.body;
+    const {
+      name,
+      email,
+      password,
+      whatsapp,
+      facebook,
+      linkedin,
+      instagram,
+      twitter,
+      cep,
+      idCity,
+      idState,
+      address,
+      number,
+      district,
+      complement,
+    } = req.body;
     var passwordHash = await bcrypt.hash(password, 10);
 
     try {
@@ -22,8 +38,27 @@ module.exports = {
         });
       }
 
-      const sql = "INSERT INTO user(name,email,password) VALUES (?,?,?)";
-      const values = [name, email, passwordHash];
+      const sql =
+        "INSERT INTO user(name,email,password,whatsapp,facebook,linkedin,instagram,twitter,cep,idCity,idState,address,number,district,complement,createdAt, updatedAt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+      const values = [
+        name,
+        email,
+        passwordHash,
+        whatsapp,
+        facebook,
+        linkedin,
+        instagram,
+        twitter,
+        cep,
+        idCity,
+        idState,
+        address,
+        number,
+        district,
+        complement,
+        new Date(),
+        new Date(),
+      ];
       await conn.query(sql, values);
 
       return res.status(200).json({
