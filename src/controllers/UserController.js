@@ -109,7 +109,7 @@ module.exports = {
         "SELECT * FROM user WHERE email=?",
         [email]
       );
-      if (verifyEmail.length > 0) {
+      if (verifyEmail.length > 0 && verifyEmail[0].id != id) {
         return res.status(400).json({
           type: "error",
           msg: "Esse e-mail já está cadastrado no sistema",
