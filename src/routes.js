@@ -4,6 +4,7 @@ const AuthController = require("./controllers/AuthController");
 const StateController = require("./controllers/StateController");
 const CityController = require("./controllers/CityController");
 const ProjectController = require("./controllers/ProjectController");
+const ProjectTypesController = require("./controllers/ProjectTypesController");
 
 const routes = Router();
 
@@ -27,9 +28,17 @@ routes.get("/state", StateController.index);
 routes.get("/city", CityController.index);
 
 //Project
+routes.get("/projects", ProjectController.index);
 routes.post("/project/register", ProjectController.store);
 routes.put("/project/:id/update", ProjectController.update);
 routes.get("/project/:id", ProjectController.show);
 routes.delete("/project/:id", ProjectController.destroy);
+
+//Project Types
+routes.get("/project-types", ProjectTypesController.index);
+routes.post("/project-types/register", ProjectTypesController.store);
+routes.put("/project-types/:id/update", ProjectTypesController.update);
+routes.get("/project-types/:id", ProjectTypesController.show);
+routes.delete("/project-types/:id", ProjectTypesController.destroy);
 
 module.exports = routes;

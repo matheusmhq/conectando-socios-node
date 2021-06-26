@@ -154,10 +154,8 @@ module.exports = {
       const conn = await connect();
 
       //Verify if exist account with this id
-      const [verifyId] = await conn.query("SELECT * FROM user WHERE id=?", [
-        id,
-      ]);
-      if (verifyId.length == 0) {
+      const [user] = await conn.query("SELECT * FROM user WHERE id=?", [id]);
+      if (user.length == 0) {
         return res.status(400).json({
           type: "error",
           msg: "Usuário não encontrado",
@@ -166,7 +164,7 @@ module.exports = {
 
       return res.status(200).json({
         type: "success",
-        user: verifyId[0],
+        user: user[0],
       });
     } catch (error) {
       return res.status(400).send({ type: "error", msg: error.message });
