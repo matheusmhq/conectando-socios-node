@@ -3,6 +3,7 @@ const UserController = require("./controllers/UserController");
 const AuthController = require("./controllers/AuthController");
 const StateController = require("./controllers/StateController");
 const CityController = require("./controllers/CityController");
+const ProjectController = require("./controllers/ProjectController");
 
 const routes = Router();
 
@@ -24,5 +25,11 @@ routes.get("/state", StateController.index);
 
 //City
 routes.get("/city", CityController.index);
+
+//Project
+routes.post("/project/register", ProjectController.store);
+routes.put("/project/:id/update", ProjectController.update);
+routes.get("/project/:id", ProjectController.show);
+routes.delete("/project/:id", ProjectController.destroy);
 
 module.exports = routes;
