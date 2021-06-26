@@ -10,7 +10,7 @@ module.exports = {
 
     if (query != "" && query != undefined) {
       filters.push("%" + query + "%");
-      sql += " AND project.title Like ?";
+      sql += " AND CONCAT(project.title, project.description) LIKE ?";
     }
     if (idType != 0 && idType != undefined) {
       filters.push(idType);

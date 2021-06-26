@@ -5,6 +5,7 @@ const StateController = require("./controllers/StateController");
 const CityController = require("./controllers/CityController");
 const ProjectController = require("./controllers/ProjectController");
 const ProjectTypesController = require("./controllers/ProjectTypesController");
+const ProjectSaveController = require("./controllers/ProjectSaveController");
 
 const routes = Router();
 
@@ -40,5 +41,10 @@ routes.post("/project-types/register", ProjectTypesController.store);
 routes.put("/project-types/:id/update", ProjectTypesController.update);
 routes.get("/project-types/:id", ProjectTypesController.show);
 routes.delete("/project-types/:id", ProjectTypesController.destroy);
+
+//Project Save
+routes.get("/projects-save", ProjectSaveController.index);
+routes.post("/project-save/register", ProjectSaveController.store);
+routes.delete("/project-save/:id", ProjectSaveController.destroy);
 
 module.exports = routes;
