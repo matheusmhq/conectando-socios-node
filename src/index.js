@@ -12,6 +12,6 @@ app.use(express.json());
 app.use(routes);
 
 var port = "";
-if (process.env.NODE_ENV === "production") process.env.PORT || 8000;
-else port = port = "3333";
+if (process.env.NODE_ENV == "production") process.env.PORT || 8000;
+else port = "3333";
 app.listen(port);
