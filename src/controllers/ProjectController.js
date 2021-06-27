@@ -136,6 +136,7 @@ module.exports = {
       }
 
       await conn.query("DELETE FROM project WHERE id=?", [id]);
+      await conn.query("DELETE FROM project_save WHERE idProject=?", [id]);
 
       return res.status(200).json({
         type: "success",
