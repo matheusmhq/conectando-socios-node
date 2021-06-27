@@ -33,6 +33,7 @@ module.exports = {
         [email]
       );
       if (verifyEmail.length > 0) {
+        conn.end();
         return res.status(400).json({
           type: "error",
           msg: "Esse e-mail já está cadastrado no sistema",
@@ -61,6 +62,7 @@ module.exports = {
         new Date(),
       ];
       await conn.query(sql, values);
+      conn.end();
 
       return res.status(200).json({
         type: "success",
@@ -98,6 +100,7 @@ module.exports = {
         id,
       ]);
       if (verifyId.length == 0) {
+        conn.end();
         return res.status(400).json({
           type: "error",
           msg: "Usuário não encontrado",
@@ -110,6 +113,7 @@ module.exports = {
         [email]
       );
       if (verifyEmail.length > 0 && verifyEmail[0].id != id) {
+        conn.end();
         return res.status(400).json({
           type: "error",
           msg: "Esse e-mail já está cadastrado no sistema",
@@ -137,6 +141,7 @@ module.exports = {
         id,
       ];
       await conn.query(sql, values);
+      conn.end();
 
       return res.status(200).json({
         type: "success",
@@ -156,12 +161,14 @@ module.exports = {
       //Verify if exist account with this id
       const [user] = await conn.query("SELECT * FROM user WHERE id=?", [id]);
       if (user.length == 0) {
+        conn.end();
         return res.status(400).json({
           type: "error",
           msg: "Usuário não encontrado",
         });
       }
 
+      conn.end();
       return res.status(200).json({
         type: "success",
         user: user[0],
@@ -183,6 +190,7 @@ module.exports = {
         [email]
       );
 
+      conn.end();
       return res.status(200).json({
         type: "success",
         hasRegister: verifyEmail.length == 0 ? false : true,

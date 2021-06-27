@@ -6,6 +6,8 @@ module.exports = {
       const conn = await connect();
 
       const [row] = await conn.query("SELECT * FROM state");
+      conn.end();
+
       return res.status(200).json({
         type: "success",
         data: row,

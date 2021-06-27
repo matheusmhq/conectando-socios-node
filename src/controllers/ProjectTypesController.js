@@ -6,6 +6,8 @@ module.exports = {
       const conn = await connect();
 
       const [list] = await conn.query("SELECT * FROM project_types");
+      conn.end();
+
       return res.status(200).json({
         type: "success",
         data: list,
@@ -24,6 +26,7 @@ module.exports = {
       const sql = "INSERT INTO project_types(name) VALUES (?)";
       const values = [name];
       await conn.query(sql, values);
+      conn.end();
 
       return res.status(200).json({
         type: "success",
@@ -47,6 +50,7 @@ module.exports = {
         [id]
       );
       if (verifyId.length == 0) {
+        conn.end();
         return res.status(400).json({
           type: "error",
           msg: "Tipo de projeto não encontrado",
@@ -56,6 +60,7 @@ module.exports = {
       const sql = "UPDATE project_types SET name=? WHERE id=?";
       const values = [name, id];
       await conn.query(sql, values);
+      conn.end();
 
       return res.status(200).json({
         type: "success",
@@ -78,11 +83,13 @@ module.exports = {
         [id]
       );
       if (projectType.length == 0) {
+        conn.end();
         return res.status(400).json({
           type: "error",
           msg: "Tipo de projeto não encontrado",
         });
       }
+      conn.end();
 
       return res.status(200).json({
         type: "success",
@@ -105,6 +112,7 @@ module.exports = {
         [id]
       );
       if (verifyId.length == 0) {
+        conn.end();
         return res.status(400).json({
           type: "error",
           msg: "Tipo de projeto não encontrado",
@@ -112,6 +120,8 @@ module.exports = {
       }
 
       await conn.query("DELETE FROM project_types WHERE id=?", [id]);
+      conn.end();
+
       return res.status(200).json({
         type: "success",
         msg: "Tipo de projeto deletado com sucesso",

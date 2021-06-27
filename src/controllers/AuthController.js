@@ -11,24 +11,47 @@ module.exports = {
       const conn = await connect();
 
       //Verify if exist account with this email
-      const [verifyId] = await conn.query("SELECT * FROM user WHERE email=?", [
-        email,
-      ]);
-      if (verifyId.length == 0) {
+      const [verifyEmail] = await conn.query(
+        "SELECT * FROM user WHERE email=?",
+        [email]
+      );
+      conn.end();
+
+      if (verifyEmail.length == 0) {
         return res.status(400).json({
           type: "error",
-          msg: "Dados incorretos",
+          msg: "E-mail ou senha inválidos",
         });
       }
 
-      const user = verifyId[0];
+      const user = verifyEmail[0];
       bcrypt.compare(password, user.password, function (err, match) {
         if (match) {
-          return res.json({ type: "success", user });
+          var obj = {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            whatsapp: user.whatsapp,
+            facebook: user.facebook,
+            linkein: user.linkein,
+            instagram: user.instagram,
+            twitter: user.twitter,
+            cep: user.cep,
+            idCity: user.idCity,
+            idState: user.idState,
+            address: user.address,
+            number: user.number,
+            district: user.district,
+            complement: user.complement,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
+          };
+
+          return res.json({ type: "success", user: obj });
         } else {
           return res.status(400).json({
             type: "error",
-            msg: "Dados incorretos",
+            msg: "E-mail ou senha inválidos",
           });
         }
       });

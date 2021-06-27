@@ -25,6 +25,7 @@ module.exports = {
       const conn = await connect();
 
       const [list] = await conn.query(sql, filters);
+      conn.end();
       return res.status(200).json({
         type: "success",
         data: list,
@@ -51,6 +52,7 @@ module.exports = {
         new Date(),
       ];
       await conn.query(sql, values);
+      conn.end();
 
       return res.status(200).json({
         type: "success",
@@ -73,6 +75,7 @@ module.exports = {
         id,
       ]);
       if (verifyId.length == 0) {
+        conn.end();
         return res.status(400).json({
           type: "error",
           msg: "Projeto não encontrado",
@@ -83,6 +86,7 @@ module.exports = {
         "UPDATE project SET idType=?, title=?, description=?, updatedAt=? WHERE id=?";
       const values = [idType, title, description, new Date(), id];
       await conn.query(sql, values);
+      conn.end();
 
       return res.status(200).json({
         type: "success",
@@ -108,6 +112,7 @@ module.exports = {
           msg: "Projeto não encontrado",
         });
       }
+      conn.end();
 
       return res.status(200).json({
         type: "success",
@@ -129,6 +134,7 @@ module.exports = {
         id,
       ]);
       if (verifyId.length == 0) {
+        conn.end();
         return res.status(400).json({
           type: "error",
           msg: "Projeto não encontrado",
@@ -137,6 +143,7 @@ module.exports = {
 
       await conn.query("DELETE FROM project WHERE id=?", [id]);
       await conn.query("DELETE FROM project_save WHERE idProject=?", [id]);
+      conn.end();
 
       return res.status(200).json({
         type: "success",

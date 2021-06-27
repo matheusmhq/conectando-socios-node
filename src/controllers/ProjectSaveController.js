@@ -26,6 +26,8 @@ module.exports = {
       const conn = await connect();
 
       const [list] = await conn.query(sql, filters);
+      conn.end();
+
       return res.status(200).json({
         type: "success",
         data: list,
@@ -44,6 +46,7 @@ module.exports = {
       const sql = "INSERT INTO project_save(idUser, idProject) VALUES (?,?)";
       const values = [idUser, idProject];
       await conn.query(sql, values);
+      conn.end();
 
       return res.status(200).json({
         type: "success",
@@ -66,6 +69,7 @@ module.exports = {
         [id]
       );
       if (verifyId.length == 0) {
+        conn.end();
         return res.status(400).json({
           type: "error",
           msg: "Registro não encontrado",
@@ -73,6 +77,7 @@ module.exports = {
       }
 
       await conn.query("DELETE FROM project_save WHERE id=?", [id]);
+      conn.end();
 
       return res.status(200).json({
         type: "success",
