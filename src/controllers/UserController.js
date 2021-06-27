@@ -141,11 +141,35 @@ module.exports = {
         id,
       ];
       await conn.query(sql, values);
+
+      var [user] = await conn.query("SELECT * FROM user WHERE id=?", [id]);
+      user = user[0];
       conn.end();
+
+      var obj = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        whatsapp: user.whatsapp,
+        facebook: user.facebook,
+        linkein: user.linkein,
+        instagram: user.instagram,
+        twitter: user.twitter,
+        cep: user.cep,
+        idCity: user.idCity,
+        idState: user.idState,
+        address: user.address,
+        number: user.number,
+        district: user.district,
+        complement: user.complement,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      };
 
       return res.status(200).json({
         type: "success",
         msg: "Usuário atualizado com sucesso",
+        user: obj,
       });
     } catch (error) {
       return res.status(400).send({ type: "error", msg: error.message });
