@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 async function connect() {
   if (global.connection && global.connection.state != "disconnected")
     return global.connection;
@@ -5,7 +7,7 @@ async function connect() {
   const mysql = require("mysql2/promise");
   try {
     const connection = await mysql.createConnection(
-      "mysql://b0b62b28e972c6:78896713@us-cdbr-east-04.cleardb.com/heroku_3afc90ae818cec7"
+      process.env.CLEARDB_DATABASE_URL
     );
     console.log("connect to MySQL!");
     global.connection = connection;
