@@ -21,6 +21,7 @@ routes.post("/user/register", UserController.store);
 routes.put("/user/:id/update", UserController.update);
 routes.get("/user/:id", UserController.show);
 routes.get("/verify-email/:email", UserController.verifyEmail);
+routes.post("/user/change-password", UserController.changePassword);
 
 //State
 routes.get("/state", StateController.index);

@@ -223,4 +223,51 @@ module.exports = {
       return res.status(400).send({ type: "error", msg: error.message });
     }
   },
+
+  async changePassword(req, res) {
+    const { id, currentPassword, newPassword } = req.body;
+
+    try {
+      const conn = await connect();
+
+      //Verify if exist account with this id
+      var [user] = await conn.query("SELECT * FROM user WHERE id=?", [id]);
+      if (user.length == 0) {
+        conn.end();
+        return res.status(400).json({
+          type: "error",
+          msg: "Usuário não encontrado",
+        });
+      }
+      user = user[0];
+
+      bcrypt.compare(
+        currentPassword,
+        user.password,
+        async function (err, match) {
+          if (match) {
+            var passwordHash = await bcrypt.hash(newPassword, 10);
+            await conn.query(
+              "UPDATE user SET password=?, updatedAt=? WHERE id=?",
+              [passwordHash, new Date(), id]
+            );
+
+            conn.end();
+            return res.json({
+              type: "success",
+              msg: "Senha alterada com sucesso",
+            });
+          } else {
+            conn.end();
+            return res.status(400).json({
+              type: "error",
+              msg: "Senha atual inválida",
+            });
+          }
+        }
+      );
+    } catch (error) {
+      return res.status(400).send({ type: "error", msg: error.message });
+    }
+  },
 };
