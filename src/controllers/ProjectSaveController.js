@@ -2,12 +2,12 @@ const { connect } = require("../db");
 
 module.exports = {
   async index(req, res) {
-    const { query, idType, idUser } = req.query;
+    const { query, idType, idUser, idState, idCity } = req.query;
 
     var filters = [];
 
     var sql =
-      "SELECT project.*, user.name, project_types.name AS type_name FROM project_save INNER JOIN project ON project.id = project_save.idProject INNER JOIN user ON project.idUser = user.id INNER JOIN project_types ON project.idType = project_types.id";
+      "SELECT project.*, user.name, project_types.name AS type_name, state.uf, city.nome AS city_name FROM project_save INNER JOIN project ON project.id = project_save.idProject INNER JOIN user ON project.idUser = user.id INNER JOIN project_types ON project.idType = project_types.id INNER JOIN state ON user.idState = state.id INNER JOIN city ON user.idCity = city.id";
 
     if (query != "" && query != undefined) {
       filters.push("%" + query + "%");
@@ -20,6 +20,14 @@ module.exports = {
     if (idUser != 0 && idUser != undefined) {
       filters.push(idUser);
       sql += " AND project_save.idUser=?";
+    }
+    if (idState != 0 && idState != undefined) {
+      filters.push(idState);
+      sql += " AND user.idState=?";
+    }
+    if (idCity != 0 && idCity != undefined) {
+      filters.push(idCity);
+      sql += " AND user.idCity=?";
     }
 
     try {

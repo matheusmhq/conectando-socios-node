@@ -5,12 +5,12 @@ module.exports = {
     try {
       const conn = await connect();
 
-      const [row] = await conn.query("SELECT * FROM state");
+      const [listState] = await conn.query("SELECT * FROM state");
       conn.end();
 
       return res.status(200).json({
         type: "success",
-        data: row,
+        data: listState,
       });
     } catch (error) {
       return res.status(400).send({ type: "error", msg: error.message });

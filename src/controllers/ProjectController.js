@@ -2,11 +2,11 @@ const { connect } = require("../db");
 
 module.exports = {
   async index(req, res) {
-    const { query, idType, idUser } = req.query;
+    const { query, idType, idUser, idState, idCity } = req.query;
 
     var filters = [];
     var sql =
-      "SELECT project.*, user.name, project_types.name AS type_name FROM project INNER JOIN user ON project.idUser = user.id INNER JOIN project_types ON project.idType = project_types.id";
+      "SELECT project.*, user.name, project_types.name AS type_name, state.uf, city.nome AS city_name FROM project INNER JOIN user ON project.idUser = user.id INNER JOIN project_types ON project.idType = project_types.id INNER JOIN state ON user.idState = state.id INNER JOIN city ON user.idCity = city.id";
 
     if (query != "" && query != undefined) {
       filters.push("%" + query + "%");
@@ -19,6 +19,14 @@ module.exports = {
     if (idUser != 0 && idUser != undefined) {
       filters.push(idUser);
       sql += " AND user.id=?";
+    }
+    if (idState != 0 && idState != undefined) {
+      filters.push(idState);
+      sql += " AND user.idState=?";
+    }
+    if (idCity != 0 && idCity != undefined) {
+      filters.push(idCity);
+      sql += " AND user.idCity=?";
     }
 
     try {
@@ -104,7 +112,7 @@ module.exports = {
       const conn = await connect();
 
       const sql =
-        "SELECT project.*, user.name, user.whatsapp, user.facebook, user.linkedin, user.instagram, user.twitter, project_types.name AS type_name, city.nome AS city_name, state.nome AS state_name FROM project INNER JOIN user ON project.idUser = user.id INNER JOIN project_types ON project.idType = project_types.id INNER JOIN state ON user.idState = state.id INNER JOIN city ON user.idCity = city.id WHERE project.id=?";
+        "SELECT project.*, user.name, user.whatsapp, user.facebook, user.linkedin, user.instagram, user.twitter, project_types.name AS type_name, project_types.id AS type_id, state.uf, city.nome AS city_name FROM project INNER JOIN user ON project.idUser = user.id INNER JOIN project_types ON project.idType = project_types.id INNER JOIN state ON user.idState = state.id INNER JOIN city ON user.idCity = city.id WHERE project.id=?";
       const [project] = await conn.query(sql, [id]);
       if (project.length == 0) {
         return res.status(400).json({
