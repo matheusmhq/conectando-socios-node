@@ -22,7 +22,7 @@ module.exports = {
         data: listCity,
       });
     } catch (error) {
-      return res.status(400).send({ type: "error", msg: error.message });
+      return res.status(400).send({ type: "error", message: error.message });
     }
   },
 };

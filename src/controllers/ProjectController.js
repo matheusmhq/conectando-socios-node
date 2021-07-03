@@ -50,7 +50,7 @@ module.exports = {
         data: list,
       });
     } catch (error) {
-      return res.status(400).send({ type: "error", msg: error.message });
+      return res.status(400).send({ type: "error", message: error.message });
     }
   },
 
@@ -75,10 +75,10 @@ module.exports = {
 
       return res.status(200).json({
         type: "success",
-        msg: "Projeto cadastrado com sucesso",
+        message: "Projeto cadastrado com sucesso",
       });
     } catch (error) {
-      return res.status(400).send({ type: "error", msg: error.message });
+      return res.status(400).send({ type: "error", message: error.message });
     }
   },
 
@@ -97,7 +97,7 @@ module.exports = {
         conn.end();
         return res.status(400).json({
           type: "error",
-          msg: "Projeto não encontrado",
+          message: "Projeto não encontrado",
         });
       }
 
@@ -109,10 +109,10 @@ module.exports = {
 
       return res.status(200).json({
         type: "success",
-        msg: "Projeto atualizado com sucesso",
+        message: "Projeto atualizado com sucesso",
       });
     } catch (error) {
-      return res.status(400).send({ type: "error", msg: error.message });
+      return res.status(400).send({ type: "error", message: error.message });
     }
   },
 
@@ -136,7 +136,7 @@ module.exports = {
       if (project.length == 0) {
         return res.status(400).json({
           type: "error",
-          msg: "Projeto não encontrado",
+          message: "Projeto não encontrado",
         });
       }
       conn.end();
@@ -146,7 +146,7 @@ module.exports = {
         project: project[0],
       });
     } catch (error) {
-      return res.status(400).send({ type: "error", msg: error.message });
+      return res.status(400).send({ type: "error", message: error.message });
     }
   },
 
@@ -164,7 +164,7 @@ module.exports = {
         conn.end();
         return res.status(400).json({
           type: "error",
-          msg: "Projeto não encontrado",
+          message: "Projeto não encontrado",
         });
       }
 
@@ -174,10 +174,10 @@ module.exports = {
 
       return res.status(200).json({
         type: "success",
-        msg: "Projeto deletado com sucesso",
+        message: "Projeto deletado com sucesso",
       });
     } catch (error) {
-      return res.status(400).send({ type: "error", msg: error.message });
+      return res.status(400).send({ type: "error", message: error.message });
     }
   },
 };

@@ -36,7 +36,7 @@ module.exports = {
         conn.end();
         return res.status(400).json({
           type: "error",
-          msg: "Esse e-mail já está cadastrado no sistema",
+          message: "Esse e-mail já está cadastrado no sistema",
         });
       }
 
@@ -66,10 +66,10 @@ module.exports = {
 
       return res.status(200).json({
         type: "success",
-        msg: "Usuário cadastrado com sucesso",
+        message: "Usuário cadastrado com sucesso",
       });
     } catch (error) {
-      return res.status(400).send({ type: "error", msg: error.message });
+      return res.status(400).send({ type: "error", message: error.message });
     }
   },
 
@@ -103,7 +103,7 @@ module.exports = {
         conn.end();
         return res.status(400).json({
           type: "error",
-          msg: "Usuário não encontrado",
+          message: "Usuário não encontrado",
         });
       }
 
@@ -116,7 +116,7 @@ module.exports = {
         conn.end();
         return res.status(400).json({
           type: "error",
-          msg: "Esse e-mail já está cadastrado no sistema",
+          message: "Esse e-mail já está cadastrado no sistema",
         });
       }
 
@@ -168,11 +168,11 @@ module.exports = {
 
       return res.status(200).json({
         type: "success",
-        msg: "Usuário atualizado com sucesso",
+        message: "Usuário atualizado com sucesso",
         user: obj,
       });
     } catch (error) {
-      return res.status(400).send({ type: "error", msg: error.message });
+      return res.status(400).send({ type: "error", message: error.message });
     }
   },
 
@@ -188,7 +188,7 @@ module.exports = {
         conn.end();
         return res.status(400).json({
           type: "error",
-          msg: "Usuário não encontrado",
+          message: "Usuário não encontrado",
         });
       }
 
@@ -198,7 +198,7 @@ module.exports = {
         user: user[0],
       });
     } catch (error) {
-      return res.status(400).send({ type: "error", msg: error.message });
+      return res.status(400).send({ type: "error", message: error.message });
     }
   },
 
@@ -220,7 +220,7 @@ module.exports = {
         hasRegister: verifyEmail.length == 0 ? false : true,
       });
     } catch (error) {
-      return res.status(400).send({ type: "error", msg: error.message });
+      return res.status(400).send({ type: "error", message: error.message });
     }
   },
 
@@ -236,7 +236,7 @@ module.exports = {
         conn.end();
         return res.status(400).json({
           type: "error",
-          msg: "Usuário não encontrado",
+          message: "Usuário não encontrado",
         });
       }
       user = user[0];
@@ -255,19 +255,19 @@ module.exports = {
             conn.end();
             return res.json({
               type: "success",
-              msg: "Senha alterada com sucesso",
+              message: "Senha alterada com sucesso",
             });
           } else {
             conn.end();
             return res.status(400).json({
               type: "error",
-              msg: "Senha atual inválida",
+              message: "Senha atual inválida",
             });
           }
         }
       );
     } catch (error) {
-      return res.status(400).send({ type: "error", msg: error.message });
+      return res.status(400).send({ type: "error", message: error.message });
     }
   },
 };

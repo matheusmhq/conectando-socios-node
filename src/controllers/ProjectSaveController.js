@@ -45,7 +45,7 @@ module.exports = {
         data: list,
       });
     } catch (error) {
-      return res.status(400).send({ type: "error", msg: error.message });
+      return res.status(400).send({ type: "error", message: error.message });
     }
   },
 
@@ -63,11 +63,11 @@ module.exports = {
 
       return res.status(200).json({
         type: "success",
-        msg: "Projeto salvo com sucesso",
+        message: "Projeto salvo com sucesso",
         id: result.insertId,
       });
     } catch (error) {
-      return res.status(400).send({ type: "error", msg: error.message });
+      return res.status(400).send({ type: "error", message: error.message });
     }
   },
 
@@ -86,7 +86,7 @@ module.exports = {
         conn.end();
         return res.status(400).json({
           type: "error",
-          msg: "Registro não encontrado",
+          message: "Registro não encontrado",
         });
       }
 
@@ -95,10 +95,10 @@ module.exports = {
 
       return res.status(200).json({
         type: "success",
-        msg: "Projeto removido com sucesso",
+        message: "Projeto removido com sucesso",
       });
     } catch (error) {
-      return res.status(400).send({ type: "error", msg: error.message });
+      return res.status(400).send({ type: "error", message: error.message });
     }
   },
 };

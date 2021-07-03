@@ -20,7 +20,7 @@ module.exports = {
       if (verifyEmail.length == 0) {
         return res.status(400).json({
           type: "error",
-          msg: "E-mail ou senha inválidos",
+          message: "E-mail ou senha inválidos",
         });
       }
 
@@ -51,12 +51,12 @@ module.exports = {
         } else {
           return res.status(400).json({
             type: "error",
-            msg: "E-mail ou senha inválidos",
+            message: "E-mail ou senha inválidos",
           });
         }
       });
     } catch (error) {
-      return res.status(400).send({ type: "error", msg: error.message });
+      return res.status(400).send({ type: "error", message: error.message });
     }
   },
 };
