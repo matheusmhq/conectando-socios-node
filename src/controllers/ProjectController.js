@@ -130,7 +130,7 @@ module.exports = {
         left_project_save = ` LEFT JOIN project_save ON (project_save.idUser = ${idUser} AND project_save.idProject = project.id)`;
       }
 
-      const sql = `SELECT project.*, user.name, user.whatsapp, user.facebook, user.linkedin, user.instagram, user.twitter, project_types.name AS typeName, project_types.id AS typeId, state.uf, city.nome AS cityName${query_project_save} FROM project INNER JOIN user ON project.idUser = user.id INNER JOIN project_types ON project.idType = project_types.id INNER JOIN state ON user.idState = state.id INNER JOIN city ON user.idCity = city.id${left_project_save} WHERE project.id=?`;
+      const sql = `SELECT project.*, user.name, user.whatsapp, user.facebook, user.linkedin, user.instagram, user.twitter, project_types.name AS typeName, project_types.id AS idType, state.uf, city.nome AS cityName${query_project_save} FROM project INNER JOIN user ON project.idUser = user.id INNER JOIN project_types ON project.idType = project_types.id INNER JOIN state ON user.idState = state.id INNER JOIN city ON user.idCity = city.id${left_project_save} WHERE project.id=?`;
 
       const [project] = await conn.query(sql, [id]);
       if (project.length == 0) {
