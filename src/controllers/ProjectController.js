@@ -70,12 +70,13 @@ module.exports = {
         new Date(),
         new Date(),
       ];
-      await conn.query(sql, values);
+      const [result] = await conn.query(sql, values);
       conn.end();
 
       return res.status(200).json({
         type: "success",
-        message: "Projeto cadastrado com sucesso",
+        message: "Projeto publicado com sucesso",
+        id: result.insertId,
       });
     } catch (error) {
       return res.status(400).send({ type: "error", message: error.message });
