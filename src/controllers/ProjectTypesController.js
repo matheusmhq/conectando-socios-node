@@ -5,7 +5,9 @@ module.exports = {
     try {
       const conn = await connect();
 
-      const [list] = await conn.query("SELECT * FROM project_types");
+      const [list] = await conn.query(
+        "SELECT * FROM project_types ORDER BY project_types.name"
+      );
       conn.end();
 
       return res.status(200).json({
