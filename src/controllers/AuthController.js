@@ -33,7 +33,7 @@ module.exports = {
             email: user.email,
             whatsapp: user.whatsapp,
             facebook: user.facebook,
-            linkein: user.linkein,
+            linkedin: user.linkedin,
             instagram: user.instagram,
             twitter: user.twitter,
             cep: user.cep,
