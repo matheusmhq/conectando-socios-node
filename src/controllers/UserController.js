@@ -225,13 +225,13 @@ module.exports = {
   },
 
   async changePassword(req, res) {
-    const { id, currentPassword, newPassword } = req.body;
+    const { idUser, currentPassword, newPassword } = req.body;
 
     try {
       const conn = await connect();
 
       //Verify if exist account with this id
-      var [user] = await conn.query("SELECT * FROM user WHERE id=?", [id]);
+      var [user] = await conn.query("SELECT * FROM user WHERE id=?", [idUser]);
       if (user.length == 0) {
         conn.end();
         return res.status(400).json({
@@ -249,7 +249,7 @@ module.exports = {
             var passwordHash = await bcrypt.hash(newPassword, 10);
             await conn.query(
               "UPDATE user SET password=?, updatedAt=? WHERE id=?",
-              [passwordHash, new Date(), id]
+              [passwordHash, new Date(), idUser]
             );
 
             conn.end();
