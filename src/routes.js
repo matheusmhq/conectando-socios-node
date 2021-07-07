@@ -10,7 +10,7 @@ const ProjectSaveController = require("./controllers/ProjectSaveController");
 const routes = Router();
 
 routes.get("/", (req, res) => {
-  return res.json({ message: "Bem vindo a api do Conectando Sócios!" });
+  return res.json({ message: "Bem-vindo a api do Conectando Sócios!" });
 });
 
 //Auth
