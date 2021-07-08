@@ -2,12 +2,12 @@ const { connect } = require("../db");
 
 module.exports = {
   async index(req, res) {
-    const { query, idType, idUser, idState, idCity, all, page, limit } =
+    const { query, idType, idUser, idState, idCity, all, page, perPage } =
       req.query;
 
-    var limit_local = limit || 10;
-    var page_local = page || 1;
-    const offset = (page_local - 1) * limit_local;
+    var perPageLocal = perPage || 10;
+    var pageLocal = page || 1;
+    const offset = (pageLocal - 1) * perPageLocal;
 
     var query_project_save = "";
     var left_project_save = "";
@@ -47,7 +47,7 @@ module.exports = {
 
       const [list] = await conn.query(
         sql +
-          ` ORDER BY project.createdAt DESC limit ${limit_local} OFFSET ${offset}`,
+          ` ORDER BY project.createdAt DESC limit ${perPageLocal} OFFSET ${offset}`,
         filters
       );
       var [total] = await conn.query("SELECT FOUND_ROWS()");
@@ -56,10 +56,10 @@ module.exports = {
 
       return res.status(200).json({
         type: "success",
-        limit: parseInt(limit),
+        perPage: parseInt(perPageLocal),
         page: parseInt(page),
         totalResults: total,
-        lastPage: total > 1 ? Math.ceil(total / limit) : 1,
+        lastPage: total > 1 ? Math.ceil(total / perPageLocal) : 1,
         data: list,
       });
     } catch (error) {
