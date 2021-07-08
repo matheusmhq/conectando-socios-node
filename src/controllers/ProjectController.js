@@ -2,7 +2,12 @@ const { connect } = require("../db");
 
 module.exports = {
   async index(req, res) {
-    const { query, idType, idUser, idState, idCity, all } = req.query;
+    const { query, idType, idUser, idState, idCity, all, page, limit } =
+      req.query;
+
+    var limit_local = limit || 10;
+    var page_local = page || 1;
+    const offset = (page_local - 1) * limit_local;
 
     var query_project_save = "";
     var left_project_save = "";
@@ -11,7 +16,7 @@ module.exports = {
       left_project_save = ` LEFT JOIN project_save ON (project_save.idUser = ${idUser} AND project_save.idProject = project.id)`;
     }
 
-    var sql = `SELECT project.*, user.name, project_types.name AS typeName, state.uf, city.nome AS cityName${query_project_save} FROM project INNER JOIN user ON project.idUser = user.id INNER JOIN project_types ON project.idType = project_types.id INNER JOIN state ON user.idState = state.id INNER JOIN city ON user.idCity = city.id${left_project_save}`;
+    var sql = `SELECT SQL_CALC_FOUND_ROWS project.*, user.name, project_types.name AS typeName, state.uf, city.nome AS cityName${query_project_save} FROM project INNER JOIN user ON project.idUser = user.id INNER JOIN project_types ON project.idType = project_types.id INNER JOIN state ON user.idState = state.id INNER JOIN city ON user.idCity = city.id${left_project_save}`;
 
     var filters = [];
     if (query != "" && query != undefined) {
@@ -41,12 +46,20 @@ module.exports = {
       const conn = await connect();
 
       const [list] = await conn.query(
-        sql + " ORDER BY project.createdAt DESC",
+        sql +
+          ` ORDER BY project.createdAt DESC limit ${limit_local} OFFSET ${offset}`,
         filters
       );
+      var [total] = await conn.query("SELECT FOUND_ROWS()");
+      total = total[0]["FOUND_ROWS()"];
       conn.end();
+
       return res.status(200).json({
         type: "success",
+        limit: parseInt(limit),
+        page: parseInt(page),
+        totalResults: total,
+        lastPage: total > 1 ? Math.ceil(total / limit) : 1,
         data: list,
       });
     } catch (error) {
