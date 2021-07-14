@@ -23,10 +23,6 @@
   <a href="#iniciando">Iniciando</a>   
 </p>
 
-<p align="center">
-    <img style="border-radius: 5px" src="src/assets/images/demo.gif" alt="Conectando Sócios React js">
-</p>
-
 # Demo
 
 [Clique aqui para acessar o front em React JS consumindo essa api! Conectando Sócios - Live ◀️](https://conectando-socios.netlify.app/)
@@ -44,7 +40,6 @@ As principais bibliotecas usadas nesse projeto:
 
 # Funcionalidades
 
-``` ```
 - Auth 
     ```
     routes.post("/user/login", AuthController.login);
