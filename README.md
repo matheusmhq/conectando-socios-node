@@ -19,7 +19,7 @@
 <p align="center">
   <a href="#demo">Demo</a> •
   <a href="#bibliotecas">Bibliotecas</a> •
-  <a href="#funcionalidades">Funcionalidades</a> •
+  <a href="#rotas">Rotas</a> •
   <a href="#iniciando">Iniciando</a>   
 </p>
 
@@ -38,7 +38,7 @@ As principais bibliotecas usadas nesse projeto:
 | [MySQL](https://github.com/sidorares/node-mysql2) | Cliente MySQL para Node.js com foco no desempenho. Suporta instruções preparadas, codificações não utf8, protocolo de log binário, compressão, SSL e muito mais. |
 
 
-# Funcionalidades
+# Rotas
 
 - Auth 
     ```
