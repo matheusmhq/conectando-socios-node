@@ -1,6 +1,6 @@
 <p  align="center">
 <a href="https://conectando-socios.netlify.app/">
-		<img src="/logo.png" alt="Logo Conectando Sócios" title="Logo Conectando Sócios" />
+		<img src="/images/logo.png" alt="Logo Conectando Sócios" title="Logo Conectando Sócios" />
 	</a>
 </p>
 
@@ -15,10 +15,11 @@
         <img src="https://img.shields.io/github/license/matheusmhq/tmdb-react-js?style=plastic" />
     </a>
 </p>
-
+s
 <p align="center">
   <a href="#demo">Demo</a> •
   <a href="#bibliotecas">Bibliotecas</a> •
+    <a href="#diagrama">Diagrama</a> •
   <a href="#rotas">Rotas</a> •
   <a href="#iniciando">Iniciando</a>   
 </p>
@@ -37,6 +38,13 @@ As principais bibliotecas usadas nesse projeto:
 | [Express](https://expressjs.com/) | O Express é um framework para aplicativo da web do Node.js mínimo e flexível que fornece um conjunto robusto de recursos para aplicativos web e móvel. |
 | [MySQL](https://github.com/sidorares/node-mysql2) | Cliente MySQL para Node.js com foco no desempenho. Suporta instruções preparadas, codificações não utf8, protocolo de log binário, compressão, SSL e muito mais. |
 
+# Diagrama
+
+<p  align="center">
+<a href="https://conectando-socios.netlify.app/">
+		<img src="/images/diagram_class.jpg" alt="Diagrama de classes do Conectando Sócios" title="Diagrama de calsses do Conectando Sócios" />
+	</a>
+</p>
 
 # Rotas
 
