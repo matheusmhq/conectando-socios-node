@@ -7,7 +7,7 @@
 #
 
 <p align="center">
-  Projeto desenvolvido pro TCC do curso de Engenharia de Software na Instuição Unicesumar.
+  Projeto desenvolvido pro TCC do curso de Engenharia de Software na Instituição Unicesumar.
 </p>
 
 <p align="center">
