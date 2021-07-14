@@ -30,7 +30,7 @@
 
 # Demo
 
-Clique no link abaixo para acessar o front em React JS consumindo essa api! 
+Clique no link para acessar o front em React JS consumindo essa api! 
 [Conectando Sócios - Live ◀️](https://conectando-socios.netlify.app/)
 
 ## Bibliotecas
