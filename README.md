@@ -7,7 +7,7 @@
 #
 
 <p align="center">
-  Api desenvolvida pro TCC do curso de Engenharia de Software na Instuição Unicesumar.
+  Projeto desenvolvido pro TCC do curso de Engenharia de Software na Instuição Unicesumar.
 </p>
 
 <p align="center">
