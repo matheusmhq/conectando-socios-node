@@ -19,7 +19,7 @@
 <p align="center">
   <a href="#demo">Demo</a> •
   <a href="#bibliotecas">Bibliotecas</a> •
-    <a href="#diagrama-de-classes">Diagrama</a> •
+    <a href="#diagrama-de-classes">Diagrama de classes</a> •
   <a href="#rotas">Rotas</a> •
   <a href="#iniciando">Iniciando</a>   
 </p>
