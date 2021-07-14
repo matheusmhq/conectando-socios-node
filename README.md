@@ -15,7 +15,7 @@
         <img src="https://img.shields.io/github/license/matheusmhq/tmdb-react-js?style=plastic" />
     </a>
 </p>
-s
+
 <p align="center">
   <a href="#demo">Demo</a> •
   <a href="#bibliotecas">Bibliotecas</a> •
@@ -42,7 +42,7 @@ As principais bibliotecas usadas nesse projeto:
 
 <p  align="center">
 <a href="https://conectando-socios.netlify.app/">
-		<img src="/images/diagram_class.jpg" alt="Diagrama de classes do Conectando Sócios" title="Diagrama de calsses do Conectando Sócios" />
+		<img src="/images/class_diagram.jpg" alt="Diagrama de classes do Conectando Sócios" title="Diagrama de calsses do Conectando Sócios" />
 	</a>
 </p>
 
