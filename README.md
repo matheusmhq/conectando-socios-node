@@ -38,7 +38,7 @@ As principais bibliotecas usadas nesse projeto:
 | [Express](https://expressjs.com/) | O Express é um framework para aplicativo da web do Node.js mínimo e flexível que fornece um conjunto robusto de recursos para aplicativos web e móvel. |
 | [MySQL](https://github.com/sidorares/node-mysql2) | Cliente MySQL para Node.js com foco no desempenho. Suporta instruções preparadas, codificações não utf8, protocolo de log binário, compressão, SSL e muito mais. |
 
-# Diagrama
+# Diagrama de classes
 
 <p  align="center">
 <a href="https://conectando-socios.netlify.app/">
