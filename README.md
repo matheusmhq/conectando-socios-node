@@ -7,6 +7,10 @@
 #
 
 <p align="center">
+  Api desenvolvida pro TCC do curso de Engenharia de Software na Instuição Unicesumar.
+</p>
+
+<p align="center">
   Api construída com Node JS e MySQL.
 </p>
 
