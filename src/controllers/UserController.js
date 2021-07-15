@@ -1,8 +1,6 @@
 const bcrypt = require("bcrypt");
 const { connect } = require("../db");
 
-//index, show, store, update, destroy
-
 module.exports = {
   async store(req, res) {
     const {
