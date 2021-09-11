@@ -7,7 +7,7 @@ async function connect() {
     console.log("connect to MySQL!");
     return connection;
   } catch (error) {
-    console.log("error to connect MySQL!" + error);
+    console.log("error to connect MySQL! " + error);
   }
 }
 
