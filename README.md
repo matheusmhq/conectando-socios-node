@@ -120,6 +120,6 @@ As principais bibliotecas usadas nesse projeto:
   yarn install
   ```
 
-- Agora é só rodar **yarn start**
+- Agora é só rodar **yarn dev**
 
 - A aplicação irá abrir no seguinte endereço `http://localhost:3333`
