@@ -109,7 +109,7 @@ As principais bibliotecas usadas nesse projeto:
 - Clonar esse repositório
 
   ```
-  git clone https://github.com/matheusmhq/conectando-socios-node
+  git clone git@github.com:matheusmhq/conectando-socios-node.git
 
   cd conectando-socios-node
   ```
@@ -117,11 +117,9 @@ As principais bibliotecas usadas nesse projeto:
 - Instale as dependências
 
   ```
-  yarn install ou npm install
+  yarn install
   ```
 
-- Agora é só rodar **yarn start** ou **npm start**
+- Agora é só rodar **yarn start**
 
 - A aplicação irá abrir no seguinte endereço `http://localhost:3333`
-
-- Bons estudos pra você! 😀😀😀
